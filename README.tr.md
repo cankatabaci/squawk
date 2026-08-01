@@ -22,6 +22,10 @@
   ╚══════════════════════════════════════════════════════════════════╝
 ```
 
+<br />
+
+<img src="assets/demo.gif" alt="squawk radar demo" width="720" />
+
 # squawk ✈
 
 **Yakınındaki gerçek uçakları terminalde, gerçek zamanlı olarak gösteren bir ATC radarı.**

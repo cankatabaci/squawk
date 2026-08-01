@@ -22,6 +22,10 @@
   ╚══════════════════════════════════════════════════════════════════╝
 ```
 
+<br />
+
+<img src="assets/demo.gif" alt="squawk radar demo" width="720" />
+
 # squawk ✈
 
 **A terminal-based ATC radar that shows real aircraft flying near you — in real time.**
