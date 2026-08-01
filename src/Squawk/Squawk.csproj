@@ -28,7 +28,6 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageIcon>icon.png</PackageIcon>
 
     <!-- Tek dosya publish için (Release binary üretirken) -->
     <PublishSingleFile>true</PublishSingleFile>
