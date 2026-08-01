@@ -1,0 +1,29 @@
+## .NET Build Artifacts
+bin/
+obj/
+*.user
+*.suo
+
+## Visual Studio
+.vs/
+*.launch
+*.DotSettings.user
+
+## Published output
+out/
+publish/
+
+## IDE
+.idea/
+.vscode/
+
+## User-specific config (contains YOUR credentials & location — never commit this!)
+# Stored at: %APPDATA%\squawk\config.json  (Windows)
+#             ~/.config/squawk/config.json  (macOS/Linux)
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Logs
+*.log
