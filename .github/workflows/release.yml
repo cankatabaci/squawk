@@ -1,0 +1,56 @@
+name: Release to NuGet
+
+# Git tag'i push edilince tetiklenir: git tag v1.0.1 && git push origin v1.0.1
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    name: Pack & Publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.x'
+
+      # Tag'den sürüm numarasını al (v1.0.1 → 1.0.1)
+      - name: Extract version
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      - name: Restore
+        run: dotnet restore src/Squawk/Squawk.csproj
+
+      - name: Build
+        run: dotnet build src/Squawk/Squawk.csproj -c Release --no-restore
+
+      # NuGet .nupkg dosyasını oluştur
+      - name: Pack
+        run: >
+          dotnet pack src/Squawk/Squawk.csproj
+          -c Release
+          --no-build
+          -p:Version=${{ steps.version.outputs.VERSION }}
+          -o nupkg
+
+      # nuget.org'a yükle (NUGET_API_KEY → repo Settings > Secrets)
+      - name: Push to NuGet
+        run: >
+          dotnet nuget push nupkg/*.nupkg
+          --api-key ${{ secrets.NUGET_API_KEY }}
+          --source https://api.nuget.org/v3/index.json
+          --skip-duplicate
+
+      # GitHub Release oluştur ve .nupkg'yi ekle
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: nupkg/*.nupkg
+          generate_release_notes: true

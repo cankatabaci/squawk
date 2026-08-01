@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>squawk</AssemblyName>
+    <RootNamespace>Squawk</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+
+    <!-- Sürüm — NuGet publish öncesi bu değeri arttır -->
+    <Version>1.0.0</Version>
+
+    <!-- dotnet global tool olarak paketleme -->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>squawk</ToolCommandName>
+
+    <!-- NuGet paketi meta verileri (nuget.org'da görünür) -->
+    <PackageId>squawk</PackageId>
+    <Title>squawk</Title>
+    <Description>Terminal ATC radar — shows real aircraft near you in real time using OpenSky Network API. Green phosphor radar display with rotating sweep, range rings, and live flight data.</Description>
+    <Authors>Cankat ABACI</Authors>
+    <Copyright>Copyright © 2026 Cankat ABACI</Copyright>
+    <PackageTags>radar;atc;aviation;opensky;terminal;cli;aircraft;flight</PackageTags>
+    <PackageProjectUrl>https://github.com/cankatabaci/squawk</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/cankatabaci/squawk</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+
+    <!-- Tek dosya publish için (Release binary üretirken) -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>false</SelfContained>
+  </PropertyGroup>
+
+  <!-- NuGet paketine README ve ikon ekle -->
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <!-- İsteğe bağlı: 128x128 PNG icon (proje köküne koy) -->
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" Condition="Exists('..\..\icon.png')" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.0" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
+
